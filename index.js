@@ -5,7 +5,7 @@ const { createServer } = require('node:http');
 
 // mongodb
 const mongoose = require('mongoose');
-const { User } = require('./userModel');
+const { User } = require('./models/userModel');
 const dbhost = '127.0.0.1';
 const dbport = '27017';
 const dbname = 'tictacs';
