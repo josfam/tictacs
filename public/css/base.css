@@ -119,3 +119,13 @@ ul {
 	font-size: var(--fs-large);
 	font-weight: 400;
 }
+
+/* page region */
+main {
+	margin: 0px;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
