@@ -1,0 +1,8 @@
+/* font definitions */
+
+@font-face {
+	font-family: 'Noto Sans';
+	font-style: normal;
+	font-weight: 100 900;
+	src: url(../fonts/NotoSans-VariableFont.ttf);
+}
