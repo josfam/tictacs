@@ -15,6 +15,7 @@
 		--fs-normal: 18px;
 		--fs-large: 24px;
 		--fs-xlarge: 30px;
+		--space-min-w-text: 250px;
 	}
 }
 @media (min-width: 768px) {
@@ -26,6 +27,7 @@
 		--fs-normal: 20px;
 		--fs-large: 26px;
 		--fs-xlarge: 30px;
+		--space-min-w-text: 540px;
 	}
 }
 
@@ -86,7 +88,7 @@ ul {
 	border: none;
 	background-color: hsl(212, 50%, 30%);
 	color: white;
-	min-width: 200px;
+	min-width: 250px;
 	font-size: var(--fs-small);
 }
 
@@ -111,8 +113,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* max-width: 700px; */
-	min-width: 400px;
+	min-width: var(--space-min-w-text);
 }
 
 .page-heading {

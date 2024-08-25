@@ -5,4 +5,7 @@
 	--fs-normal: 24px;
 	--fs-large: 30px;
 	--fs-xlarge: 36px;
+
+	/* spacing */
+	--space-min-w-text: 700px;
 }
