@@ -1,0 +1,132 @@
+/* Import css variables */
+@import url('variables.css');
+
+* {
+	box-sizing: border-box;
+}
+
+/* responsive type */
+@media (min-width: 375px) {
+	/* phones and up */
+	:root {
+		/* font sizes */
+		--fs-xsmall: 12px;
+		--fs-small: 14px;
+		--fs-normal: 18px;
+		--fs-large: 24px;
+		--fs-xlarge: 30px;
+		--space-min-w-text: 250px;
+	}
+}
+@media (min-width: 768px) {
+	/* tablets and up */
+	:root {
+		/* font sizes */
+		--fs-xsmall: 14px;
+		--fs-small: 16px;
+		--fs-normal: 20px;
+		--fs-large: 26px;
+		--fs-xlarge: 30px;
+		--space-min-w-text: 540px;
+	}
+}
+
+@media (min-width: 1024px) {
+	/* laptops and up */
+	:root {
+		/* font sizes */
+		--fs-xsmall: 14px;
+		--fs-small: 18px;
+		--fs-normal: 24px;
+		--fs-large: 30px;
+		--fs-xlarge: 36px;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: var(--fs-normal);
+	background-color: hsl(39, 100%, 90%);
+}
+
+form {
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	width: 50%;
+	min-width: 400px;
+}
+
+form input {
+	width: 100%;
+	height: 40px;
+	border: 1px solid;
+	border-color: hsl(216, 10%, 78%);;
+	border-radius: 5px;
+	font-size: var(--fs-normal);
+	padding: 20px;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+}
+
+.btn-cta-primary {
+	height: 50px;
+	border-radius: 10px;
+	border: none;
+	background-color: hsl(212, 50%, 30%);
+	color: white;
+	min-width: 250px;
+	font-size: var(--fs-small);
+}
+
+.btn-cta-primary:hover {
+	background-color: hsl(213, 50%, 45%);
+}
+
+.btn-cta-primary:active {
+	transform: scale(0.98);
+}
+
+#landing-btns {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 40px;
+	margin-top: 30px;
+}
+
+.game-info {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: var(--space-min-w-text);
+}
+
+.page-heading {
+	font-size: var(--fs-large);
+	font-weight: 400;
+}
+
+/* page region */
+main {
+	margin: 0px;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
