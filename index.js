@@ -1,11 +1,11 @@
 // entry point
 const express = require('express');
-const bcrypt = require('bcrypt');
 const { createServer } = require('node:http');
+const apiAuthRoutes = require('./routes/api/v1/auth');
+const pageRoutes = require('./routes/pages');
 
 // mongodb
 const mongoose = require('mongoose');
-const { User } = require('./models/userModel');
 const dbhost = '127.0.0.1';
 const dbport = '27017';
 const dbname = 'tictacs';
@@ -16,6 +16,13 @@ const port = 3000;
 
 // http server
 const server = createServer(app);
+
+// middleware and api routes
+app.use(express.static('public')); // serve static files
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // json parsing
+app.use('/api/v1/auth', apiAuthRoutes);
+app.use('/', pageRoutes);
 
 async function main () {
   // connect to mongodb server
