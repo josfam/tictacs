@@ -25,6 +25,14 @@ const userSchema = new mongoose.Schema({
       default: 0,
     }
   },
+  online: {
+    type: Boolean,
+    default: false,
+  },
+  in_game: {
+    type: Boolean,
+    default: false,
+  },
   created_at: {
     type: Date,
     default: Date.now,
