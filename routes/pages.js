@@ -16,4 +16,7 @@ router.get('/login', async (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'login.html'));
 });
 
+router.get('/lobby', async(req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'lobby.html'));
+});
 module.exports = router;

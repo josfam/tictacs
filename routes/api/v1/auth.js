@@ -58,4 +58,30 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/logout', async (req, res) => {
+  const userId = req.session.userId;
+  if (userId) {
+    try {
+
+      const user = await User.findById(userId);
+      if (user) {
+        user.online = false;
+        await user.save();
+      }
+    } catch (error) {
+      res.status(500).json({message: "Couldn't update your details. Failed to logout. Try again"})};
+  }
+
+  // remove session from db store
+  req.session.destroy(error => {
+    if (error) {
+      return res.status(500).json({message: "Couldn't log you out. Try again"});
+    }
+    return res.status(200).json({message: "Logged out successfully"});
+  });
+  // remove cookie from the client
+  res.clearCookie('connect.sid')
+
+});
+
 module.exports = router;

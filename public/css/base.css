@@ -130,3 +130,10 @@ main {
 	align-items: center;
 	width: 100%;
 }
+
+#lobby-live {
+	width: 80%;
+	height: 400px;
+	background-color: white;
+	overflow-y: scroll;
+}

@@ -24,6 +24,7 @@ window.onload = function() {
     if (response.ok)
     {
       alert(info.message);
+      window.location.href = '/lobby';
     } else {
       alert(info.message);
     }
