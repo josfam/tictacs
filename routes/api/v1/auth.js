@@ -19,6 +19,9 @@ router.post('/signup', async (req, res) => {
         password: hashedPassword,
       });
       await newUser.save();
+
+      req.session.userId = newUser._id; // save user info in the session store
+
       return res.status(200).json({ message: 'Signed up successfully' });
     }
     return res.status(409).json({ message: 'Username already taken!'});
@@ -39,6 +42,7 @@ router.post('/login', async (req, res) => {
     const hashedPassword = existingUser.password;
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
     if (passwordsMatch) {
+      req.session.userId = existingUser._id // save user info in the session store
       return res.status(200).json({ message: 'Logged in successfully!' })
     }
     return res.status(409).json({ message: 'Incorrect username or password' });

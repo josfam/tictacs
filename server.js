@@ -5,6 +5,8 @@ const express = require('express');
 const { createServer } = require('node:http');
 const apiAuthRoutes = require('./routes/api/v1/auth');
 const pageRoutes = require('./routes/pages');
+const session = require('express-session'); // generating session ids & cookies
+const MongoStore = require('connect-mongo');
 
 // mongodb
 const mongoose = require('mongoose');
@@ -18,6 +20,21 @@ const port = 3000;
 
 // http server
 const server = createServer(app);
+
+// middleware for sessions
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // 1 day (milliseconds)
+  },
+  store: MongoStore.create({
+    mongoUrl: `mongodb://${dbhost}:${dbport}/${dbname}`,
+    collectionName: 'user_sessions'
+  })
+}
+));
 
 // middleware and api routes
 app.use(express.static('public')); // serve static files
