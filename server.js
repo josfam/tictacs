@@ -1,4 +1,6 @@
 // entry point
+require('dotenv').config(); // load in environment variables from .env file
+
 const express = require('express');
 const { createServer } = require('node:http');
 const apiAuthRoutes = require('./routes/api/v1/auth');
@@ -6,9 +8,9 @@ const pageRoutes = require('./routes/pages');
 
 // mongodb
 const mongoose = require('mongoose');
-const dbhost = '127.0.0.1';
-const dbport = '27017';
-const dbname = 'tictacs';
+const dbhost = process.env.DB_HOST;
+const dbport = process.env.DB_PORT;
+const dbname = process.env.DB_NAME;
 
 // app instance
 const app = express();
