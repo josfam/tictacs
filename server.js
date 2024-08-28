@@ -21,8 +21,7 @@ const port = 3000;
 
 const server = createServer(app); // http server
 
-// middleware for sessions
-app.use(session({
+const sessionMiddleWare = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -35,7 +34,10 @@ app.use(session({
     collectionName: 'user_sessions'
   })
 }
-));
+);
+
+// middleware for sessions
+app.use(sessionMiddleWare);
 
 // middleware and api routes
 app.use(express.static('public')); // serve static files
@@ -45,10 +47,14 @@ app.use('/api/v1/auth', apiAuthRoutes);
 app.use('/', pageRoutes);
 
 const io = new Server(server); // socket io server
+io.engine.use(sessionMiddleWare);
 
 // socketio connections
 io.on('connection', (socket) => {
   console.log('a user has connected!');
+  const session = socket.request.session;
+  const username = session.username;
+  io.emit('player-joined', {username});
 });
 
 async function main () {
