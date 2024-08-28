@@ -3,6 +3,7 @@ require('dotenv').config(); // load in environment variables from .env file
 
 const express = require('express');
 const { createServer } = require('node:http');
+const { Server } = require('socket.io');
 const apiAuthRoutes = require('./routes/api/v1/auth');
 const pageRoutes = require('./routes/pages');
 const session = require('express-session'); // generating session ids & cookies
@@ -18,8 +19,7 @@ const dbname = process.env.DB_NAME;
 const app = express();
 const port = 3000;
 
-// http server
-const server = createServer(app);
+const server = createServer(app); // http server
 
 // middleware for sessions
 app.use(session({
@@ -42,6 +42,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // json parsing
 app.use('/api/v1/auth', apiAuthRoutes);
 app.use('/', pageRoutes);
+
+const io = new Server(server); // socket io server
+
+// socketio connections
+io.on('connection', (socket) => {
+  console.log('a user has connected!');
+});
 
 async function main () {
   // connect to mongodb server

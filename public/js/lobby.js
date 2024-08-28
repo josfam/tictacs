@@ -16,4 +16,7 @@ window.onload = function() {
       alert(info.message);
     }
   });
+
+  // socket io events
+  const socket = io();
 };
