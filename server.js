@@ -62,7 +62,18 @@ io.on('connection', (socket) => {
   console.log(`${username} has connected!`);
   // give the user back their own username
   socket.emit('get-your-name', username);
-  ;
+
+  // gets the user's socket, for socket-specific events
+  const getUserSocket = function (username){
+    const allConnectedSockets = io.sockets.sockets;
+    for (let [id, socket] of allConnectedSockets) {
+      const socketUser = socket.request.session.username;
+      if (username === socketUser) {
+        console.log(`Opponent ${username} was found!`);
+        return socket;
+      }
+    }
+  };
 
   if (!players_online.has(username)) {
     players_online.add(username);
@@ -78,6 +89,13 @@ io.on('connection', (socket) => {
       io.emit('player-left', username);
     }
     console.log('Logout:', players_online)
+  });
+
+  socket.on('challenge-issued', (players) => {
+    const { challenger, opponent } = players;
+    console.log(`${challenger} is challenging ${opponent} now`); // DEBUG
+    const opponentSocket = getUserSocket(opponent);
+    opponentSocket.emit('challenged-to-a-game', challenger);
   });
 
   socket.on('disconnect', () => {

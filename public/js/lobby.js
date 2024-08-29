@@ -20,8 +20,10 @@ window.onload = function() {
     }
   });
 
+  let prospectChallenger = ''; // this user is themselves a prospect challenger
+
   socket.on('get-your-name', (username) => {
-    playerName = username;
+    prospectChallenger = username;
     const pageHeading = doc.querySelector('.page-heading');
     const originalText = pageHeading.textContent;
     if (!(originalText.includes(username))) {
@@ -29,7 +31,6 @@ window.onload = function() {
     };
   });
 
-  const liveLobby = doc.getElementById('live-lobby');
   const playersOnlineList = doc.getElementById('players-online');
 
   const getPlayerRowInLobby = function (username, buttonText) {
@@ -65,18 +66,38 @@ window.onload = function() {
     //clear the current lobby
     playersOnlineList.textContent = '';
     for (const username of players) {
-      const newPlayerRow = getPlayerRowInLobby(username, 'Challenge')
+      const newPlayerRow = getPlayerRowInLobby(username, 'challenge')
       playersOnlineList.appendChild(newPlayerRow);
     }
   });
 
   socket.on('player-joined', (player) => {
-    const newPlayerItem = getPlayerRowInLobby(player.username, 'Challenge');
+    const newPlayerItem = getPlayerRowInLobby(player.username, 'challenge');
     playersOnlineList.appendChild(newPlayerItem);
   });
 
   socket.on('player-left', (username) => {
     // remove the logged out player from this user's dom
     removePlayerFromLobby(username);
+  });
+
+  // being challenged by another player
+  socket.on('challenged-to-a-game', (opponent) => {
+    alert(`You have been challenged to a game! by ${opponent}`)
+  });
+
+  // challenging a player
+  doc.addEventListener('click', (event) => {
+    const clickedBtn = event.target;
+    if (clickedBtn.classList.contains('challengeBtn')) {
+      const challenger = prospectChallenger;
+      const opponent = clickedBtn.id;
+      if (challenger === opponent) {
+        alert("You can't challenge yourself :)");
+        return;
+      }
+      // emit a challenge event to web socket
+      socket.emit('challenge-issued', { challenger, opponent });
+    }
   });
 };
