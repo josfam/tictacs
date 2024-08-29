@@ -49,12 +49,41 @@ app.use('/', pageRoutes);
 const io = new Server(server); // socket io server
 io.engine.use(sessionMiddleWare);
 
+// track users who are currently online.
+players_online = new Set();
+
 // socketio connections
 io.on('connection', (socket) => {
-  console.log('a user has connected!');
   const session = socket.request.session;
   const username = session.username;
-  io.emit('player-joined', {username});
+  console.log(`${username} has connected!`);
+  // give the user back their own username
+  socket.emit('get-your-name', username);
+  ;
+
+  if (!players_online.has(username)) {
+    players_online.add(username);
+    socket.emit('get-players-online', Array.from(players_online));
+    io.emit('player-joined', {username});
+  }
+  console.log('New connection:', players_online) // DEBUG
+  socket.on('logout', () => {
+    // remove from online players
+    if (players_online.has(username)) {
+      players_online.delete(username);
+      io.emit('player-left', username);
+    }
+    console.log('Logout:', players_online)
+  });
+
+  socket.on('disconnect', () => {
+    // remove from online players
+    if (players_online.has(username)) {
+      players_online.delete(username);
+      io.emit('player-left', username);
+      console.log('Disconnect:', players_online)
+    }
+  });
 });
 
 async function main () {
