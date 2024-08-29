@@ -50,6 +50,16 @@ window.onload = function() {
       return newPlayerItem;
   };
 
+  const removePlayerFromLobby = function (username) {
+    const playerLists = playersOnlineList.getElementsByClassName('player-row');
+    for (const listItem of playerLists) {
+      const usernameDiv = listItem.querySelector('.username');
+      if (usernameDiv.textContent === username) {
+        usernameDiv.parentNode.parentNode.removeChild(listItem);
+      }
+    }
+  }
+
   // get a list of all online players
   socket.on('get-players-online', (players) => {
     //clear the current lobby
@@ -67,12 +77,6 @@ window.onload = function() {
 
   socket.on('player-left', (username) => {
     // remove the logged out player from this user's dom
-    const allPlayers = playersOnlineList.getElementsByTagName('li');
-    for (const i = 0; i < allPlayers.length; i++) {
-      if (allPlayers[i].textContent === username) {
-        playersOnlineList.removeChild(allPlayers[i]);
-        break;
-      }
-    }
+    removePlayerFromLobby(username);
   });
 };

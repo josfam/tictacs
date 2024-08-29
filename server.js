@@ -67,6 +67,7 @@ io.on('connection', (socket) => {
     io.emit('player-joined', {username});
   }
   console.log('New connection:', players_online) // DEBUG
+
   socket.on('logout', () => {
     // remove from online players
     if (players_online.has(username)) {
