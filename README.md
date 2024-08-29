@@ -40,7 +40,24 @@ curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-ge
 npm install
 ```
 
-### 5. Start the local server
+### 5. Add a .env file at the root or the repository
+
+The project server loads information from environment variables in a `.env` file.
+\
+This file is not included in this repository, as it contains secrets.
+\
+You therefore have to make your own `.env` file. You can use this template, and give your own value to the
+\
+`SESSION_SECRET` variable by putting anything between the quotation marks.
+
+```sh
+SESSION_SECRET=""
+DB_HOST="127.0.0.1"
+DB_PORT="27017"
+DB_NAME="tictacs"
+```
+
+### 6. Start the local server
 
 ```sh
 npm run devstart
@@ -61,7 +78,7 @@ Connected successfully!
 Server listening on port 3000
 ```
 
-### 6. Visit the application in your browser of choice
+### 7. Visit the application in your browser of choice
 
 In the url of your browser, type in (or paste in):
 
