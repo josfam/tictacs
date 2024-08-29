@@ -5,6 +5,7 @@ const express = require('express');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
 const apiAuthRoutes = require('./routes/api/v1/auth');
+const apiUserRoutes = require('./routes/api/v1/users');
 const pageRoutes = require('./routes/pages');
 const session = require('express-session'); // generating session ids & cookies
 const MongoStore = require('connect-mongo');
@@ -44,6 +45,7 @@ app.use(express.static('public')); // serve static files
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // json parsing
 app.use('/api/v1/auth', apiAuthRoutes);
+app.use('/api/v1/users/', apiUserRoutes);
 app.use('/', pageRoutes);
 
 const io = new Server(server); // socket io server
