@@ -2,12 +2,22 @@
 
 A multiplayer tic-tac-toe game. This is our project submission for the qualifying round of the ALX SE Face Off competition(2024)
 
-## How to run the project in a unix environment
+---
+
+Note: The entire project setup also includes a separate frontend setup.
+\
+Set up this backend first.
+\
+Instructions for the frontend will be at the very end.
+
+---
+
+## How to run the project locally in a unix environment (back-end setup)
 
 ### 1. Clone this repository and cd into it
 
 ```sh
-git clone https://github.com/josfam/tictacs && cd tictacs
+git clone https://github.com/josfam/tictacs-backend && cd tictacs-backend
 ```
 
 ### 2. Install mongodb
@@ -78,10 +88,8 @@ Connected successfully!
 Server listening on port 3000
 ```
 
-### 7. Visit the application in your browser of choice
+That's it. You have now set up the backend server and database.
 
-In the url of your browser, type in (or paste in):
+---
 
-```txt
-localhost:3000
-```
+You can now proceed to (if you have not already), [setup the frontend](https://github.com/josfam/tictacs-frontend)
