@@ -42,6 +42,7 @@ app.use(sessionMiddleWare);
 
 // middleware and api routes
 app.use(express.static('public')); // serve static files
+app.use(express.static('testing')) // # TESTING
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // json parsing
 app.use('/api/v1/auth', apiAuthRoutes);

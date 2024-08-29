@@ -19,4 +19,10 @@ router.get('/login', async (req, res) => {
 router.get('/lobby', async(req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'lobby.html'));
 });
+
+// serve api testing page: Nonproduction
+router.get('/apitesting', async(req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'testing', 'apitesting.html'));
+});
+
 module.exports = router;

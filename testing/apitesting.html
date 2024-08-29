@@ -1,0 +1,40 @@
+<!-- THIS PAGE IS ONLY FOR TESTING API ENDPOINTS. DON'T PUSH TO PRODUCTION
+ NONPRODUCTIONFILE -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .testingBtn {
+        width: 300px;
+        height: 100px;
+        font-size: large;
+    }
+</style>
+
+<body>
+    <!-- testing fetching all users -->
+    <button class="testingBtn" id="testUsersOnline">testGetUsersOnline</button>
+    <script>
+        const doc = document;
+        const testUsersOnlineBtn = doc.getElementById('testUsersOnline');
+
+        testUsersOnlineBtn.addEventListener('click', async () => {
+            const response = await fetch('/api/v1/users/online', {
+                method: 'get',
+                headers: {
+                    'Content-Type': 'application/JSON'
+                },
+            });
+            if (response.ok) {
+                console.log(await response.json());
+            }
+        });
+    </script>
+</body>
+</html>
