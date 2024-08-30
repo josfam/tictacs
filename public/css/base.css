@@ -168,6 +168,8 @@ main {
     border: 2px solid black;
     font-size: 95px;
     text-align: center;
+    width: 130px;
+    height: 135px;
 }
 #top-left {
     border-radius: 20px 0px 0px 0px;
