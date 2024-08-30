@@ -105,8 +105,8 @@ io.on('connection', (socket) => {
     const gameRoomName = `${challenger}-${opponent}-game`;
     const opponentSocket = getUserSocket(otherP);
     // put the two players in a room
-    socket.join(gameRoomName);
-    opponentSocket.join(gameRoomName);
+    // socket.join(gameRoomName);
+    // opponentSocket.join(gameRoomName);
     socket.emit('good-luck', thisP);
     opponentSocket.emit('good-luck', otherP);
   });

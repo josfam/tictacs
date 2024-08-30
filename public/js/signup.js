@@ -24,7 +24,7 @@ window.onload = function() {
     if (response.ok)
     {
       alert(info.message);
-      window.location.href = '/lobby';
+      window.location.href = '/home';
     } else {
       alert(info.message);
     }

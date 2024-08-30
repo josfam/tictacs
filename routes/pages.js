@@ -29,4 +29,8 @@ router.get('/apitesting', async(req, res) => {
   res.sendFile(path.join(__dirname, '..', 'testing', 'apitesting.html'));
 });
 
+router.get('/home', async(req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'home.html'));
+});
+
 module.exports = router;

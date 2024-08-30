@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/fonts.css">
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+        <script src="js/game.js" defer></script>
+    </head>
+
+    <body>
+        <h1>Welcome User, who do you want to play</h1>
+        <div id="landing-btns">
+            <button class="btn-cta-primary" id="computerbtn">Play a Computer</button>
+            <button class="btn-cta-primary" id="humanbtn">Play a Human</button>
+    <script>
+        const doc = document;
+        const cB = doc.getElementById('computerbtn');
+        const hB = doc.getElementById('humanbtn');
+
+        cB.addEventListener('click', async (event) => {
+            window.location.href = '/computerGame';
+        });
+
+        hB.addEventListener('click', async (event) => {
+            window.location.href = '/lobby';
+        });
+    </script>
+    </body>
+</html>
