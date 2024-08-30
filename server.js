@@ -111,6 +111,16 @@ io.on('connection', (socket) => {
     opponentSocket.emit('good-luck', otherP);
   });
 
+  socket.on('move-made', (moveData) => {
+    const { thisP, otherP, location, thisPMark } = moveData;
+    const opponentSocket = getUserSocket(otherP);
+    opponentSocket.emit('update-board', {
+      'opponentMark': thisPMark,
+      'nextTurn': otherP,
+      location
+    });
+  });
+
   socket.on('disconnect', () => {
     // remove from online players
     if (players_online.has(username)) {
