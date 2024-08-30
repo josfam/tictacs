@@ -24,13 +24,29 @@ window.onload = function() {
   // decide opponent role and place name at the bottom of the board
   socket.emit('game-joined', pairingInfo);
   socket.on('good-luck', (username) => {
-    alert(`good luck ${username}`);
+    // alert(`good luck ${username}`);
   });
 
   // place player names on the board
   const thisPNameDiv = doc.getElementById('this-player-name');
   thisPNameDiv.textContent = `${thisP} (${thisPMark})`;
-  
+
   const otherPIndicator = doc.getElementById('other-player-name')
   otherPIndicator.textContent = `${otherP} (${otherPMark})`;
+
+  // x (the challenger) starts first always
+  playerTurn = p1;
+  const infoBox = doc.getElementById('info-box');
+  infoBox.textContent = `${p1}'s turn!`
+
+  const placeSymbol = function(event) {
+    const cell = event.target;
+    cell.textContent = 'X';
+  };
+
+  // attache event listeners to each cell
+  const allCells = doc.querySelectorAll('[data-cell]');
+  allCells.forEach(cell => {
+    cell.addEventListener('click', placeSymbol);
+  });
 };
