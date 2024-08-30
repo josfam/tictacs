@@ -56,9 +56,17 @@ window.onload = function() {
     cell.textContent = thisPMark;
     const location = this.dataset.cell;
     canEditBoard = false;
-
+    makeTableArray();
     playerTurn = otherP;
     infoBox.textContent = `${otherP}'s turn!`
+    if (winnerExists(makeTableArray())) {
+      alert('Winner found');
+      return;
+    }
+    if (boardIsFull(makeTableArray())) {
+      alert('Draw');
+      return;
+    }
 
     socket.emit('move-made', {thisP, otherP, location, thisPMark});
   };
@@ -76,6 +84,14 @@ window.onload = function() {
     console.log('Received', opponentMark, location);
     const cell = doc.getElementById(location);
     cell.textContent = opponentMark;
+    if (winnerExists(makeTableArray())) {
+      alert('Winner found');
+      return;
+    }
+    if (boardIsFull(makeTableArray())) {
+      alert('Draw');
+      return;
+    }
     infoBox.textContent = `${nextTurn}'s turn!`
   });
 
@@ -91,6 +107,34 @@ window.onload = function() {
   ];
 
   const makeTableArray = function () {
-    
+    // start with null
+    const table = Array(9).fill(null);
+    const cells = doc.querySelectorAll('#game-board td');
+    cells.forEach(cell => {
+      const cellId = Number(cell.id);
+      const mark = cell.textContent
+      table[cellId] = mark;
+    });
+    console.log(table);
+    return table;
+  }
+
+  const winnerExists = function (grid) {
+    for (row of winningCombos) {
+      [a, b, c] = row;
+      if (grid[a] && grid[a] === grid[b] && grid[a] === grid[c]) {
+        return row;
+      }
+    }
+    return 0;
+  };
+
+  const boardIsFull = function (grid) {
+    for (spot in grid) {
+      if (grid[spot] === "") {
+        return 0;
+      }
+    }
+    return 1;
   }
 };
