@@ -168,6 +168,8 @@ main {
     border: 2px solid black;
     font-size: 95px;
     text-align: center;
+    width: 130px;
+    height: 135px;
 }
 #top-left {
     border-radius: 20px 0px 0px 0px;
@@ -182,7 +184,7 @@ main {
     border-radius: 0px 0px 20px 0px;
 }
 
-#table-stats {
+#table-info {
     display: flex;
     align-items: center;
 }
@@ -199,14 +201,15 @@ main {
     /* background-color: red; */
 }
 
-#turn-announcer {
+#info-box {
     height: 150px;
+    width: 300px;
     background-color: rgb(0, 194, 194);
-}
-#mini-stats-container {
-    width: 200px;
-    height: 250px;
-    background-color: blueviolet;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-large);
 }
 
 .username-indicator {

@@ -95,30 +95,29 @@ io.on('connection', (socket) => {
     const { challenger, opponent } = players;
     console.log(`${challenger} is challenging ${opponent} now`); // DEBUG
     const opponentSocket = getUserSocket(opponent);
+    console.log('Opponent socket', opponentSocket); // debug   
+    socket.emit('challenging-to-a-game', opponent);
     opponentSocket.emit('challenged-to-a-game', challenger);
+  });
 
-    const gameRoomName = `${challenger}-${opponent}`;
+  socket.on('game-joined', (playerInfo) => {
+    const { thisP, otherP, challenger, opponent} = playerInfo;
+    const gameRoomName = `${challenger}-${opponent}-game`;
+    const opponentSocket = getUserSocket(otherP);
     // put the two players in a room
     socket.join(gameRoomName);
     opponentSocket.join(gameRoomName);
-
-    // send start game notification to both players
-    io.to(gameRoomName).emit('game-has-started', {
-      gameRoomName,
-      challenger,
-      opponent});
-  });
-
-  socket.on('game-joined', (username) => {
-    socket.emit('good-luck', username);
+    socket.emit('good-luck', thisP);
+    opponentSocket.emit('good-luck', otherP);
   });
 
   socket.on('disconnect', () => {
     // remove from online players
     if (players_online.has(username)) {
       players_online.delete(username);
+      console.log(username,'Disconnected!')
       io.emit('player-left', username);
-      console.log('Disconnect:', players_online)
+      console.log('After Disconnect, onlineplayers => ', players_online)
     }
   });
 });

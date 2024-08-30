@@ -84,13 +84,13 @@ window.onload = function() {
   // being challenged by another player
   socket.on('challenged-to-a-game', (opponent) => {
     alert(`You have been challenged to a game! by ${opponent}`)
+    window.location.href = `/game?p1=${opponent}&p1Mark=X&p2=${thisUsername}&p2Mark=O&thisP=${thisUsername}`;
   });
 
-  // start the game
-  socket.on('game-has-started', (roomInfo) => {
-    alert(`The game has started`);
-    const { gameRoomName, challenger, opponent } = roomInfo;
-    window.location.href = `/game?player1=${challenger}&player2=${opponent}&thisPlayer=${thisUsername}&roomName=${gameRoomName}`;
+  // challenging another player
+  socket.on('challenging-to-a-game', (opponent) => {
+    alert(`Challenge sent to ${opponent}`);
+    window.location.href = `/game?p1=${thisUsername}&p1Mark=X&p2=${opponent}&p2Mark=O&thisP=${thisUsername}`;
   });
 
   // challenging a player
