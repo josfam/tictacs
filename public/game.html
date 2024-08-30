@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="js/game.js" defer></script>
+</head>
+<body>
+    <main>
+        <div id="table-stats">
+            <div id="table-names">
+                <div class="username-indicator" id="other-player-name"></div>
+                <table id="game-board">
+                    <tr>
+                        <td data-cell="0" id="top-left">X</td>
+                        <td data-cell="1">X</td>
+                        <td data-cell="2" id="top-right">X</td>
+                    </tr>
+                    <tr>
+                        <td data-cell="3">O</td>
+                        <td data-cell="4">O</td>
+                        <td data-cell="5">O</td>
+                    </tr>
+                    <tr>
+                        <td data-cell="6" id="bottom-left">X</td>
+                        <td data-cell="7">X</td>
+                        <td data-cell="8" id="bottom-right">X</td>
+                    </tr>
+                </table>
+                <div class="username-indicator", id="this-player-name"></div>
+            </div>
+            <div id="sideboard">
+                <div id="turn-announcer"></div>
+                <div id="mini-stats-container"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

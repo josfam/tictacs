@@ -96,6 +96,21 @@ io.on('connection', (socket) => {
     console.log(`${challenger} is challenging ${opponent} now`); // DEBUG
     const opponentSocket = getUserSocket(opponent);
     opponentSocket.emit('challenged-to-a-game', challenger);
+
+    const gameRoomName = `${challenger}-${opponent}`;
+    // put the two players in a room
+    socket.join(gameRoomName);
+    opponentSocket.join(gameRoomName);
+
+    // send start game notification to both players
+    io.to(gameRoomName).emit('game-has-started', {
+      gameRoomName,
+      challenger,
+      opponent});
+  });
+
+  socket.on('game-joined', (username) => {
+    socket.emit('good-luck', username);
   });
 
   socket.on('disconnect', () => {

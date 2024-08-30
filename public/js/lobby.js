@@ -20,10 +20,10 @@ window.onload = function() {
     }
   });
 
-  let prospectChallenger = ''; // this user is themselves a prospect challenger
+  let thisUsername = ''; // this user is themselves a prospect challenger
 
   socket.on('get-your-name', (username) => {
-    prospectChallenger = username;
+    thisUsername = username;
     const pageHeading = doc.querySelector('.page-heading');
     const originalText = pageHeading.textContent;
     if (!(originalText.includes(username))) {
@@ -86,11 +86,18 @@ window.onload = function() {
     alert(`You have been challenged to a game! by ${opponent}`)
   });
 
+  // start the game
+  socket.on('game-has-started', (roomInfo) => {
+    alert(`The game has started`);
+    const { gameRoomName, challenger, opponent } = roomInfo;
+    window.location.href = `/game?player1=${challenger}&player2=${opponent}&thisPlayer=${thisUsername}&roomName=${gameRoomName}`;
+  });
+
   // challenging a player
   doc.addEventListener('click', (event) => {
     const clickedBtn = event.target;
     if (clickedBtn.classList.contains('challengeBtn')) {
-      const challenger = prospectChallenger;
+      const challenger = thisUsername;
       const opponent = clickedBtn.id;
       if (challenger === opponent) {
         alert("You can't challenge yourself :)");

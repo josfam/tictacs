@@ -153,3 +153,65 @@ main {
 	flex-direction: row;
 	gap: 20px;
 }
+
+/* game room styles */
+#game-board {
+    width: 400px;
+    height: 300px;
+    border-radius: 20px;
+    background-color: #b2f2bb;
+    border-collapse:separate;
+    margin: 20px;
+}
+
+[data-cell] {
+    border: 2px solid black;
+    font-size: 95px;
+    text-align: center;
+}
+#top-left {
+    border-radius: 20px 0px 0px 0px;
+}
+#top-right {
+    border-radius: 0px 20px 0px 0px;
+}
+#bottom-left {
+    border-radius: 0px 0px 0px 20px;
+}
+#bottom-right {
+    border-radius: 0px 0px 20px 0px;
+}
+
+#table-stats {
+    display: flex;
+    align-items: center;
+}
+
+#table-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username-indicator {
+    width: 300px;
+    height: 50px;
+    /* background-color: red; */
+}
+
+#turn-announcer {
+    height: 150px;
+    background-color: rgb(0, 194, 194);
+}
+#mini-stats-container {
+    width: 200px;
+    height: 250px;
+    background-color: blueviolet;
+}
+
+.username-indicator {
+    display: flex;
+    justify-content: center;
+    padding: 8px 0px 8px 0px;
+    font-size: var(--fs-large);
+}
