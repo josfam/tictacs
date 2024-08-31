@@ -45,6 +45,7 @@ window.onload = function() {
       // button
       const listButton = doc.createElement('button');
       listButton.classList.add(`${buttonText}Btn`);
+      listButton.classList.add('btn-cta-primary');
       listButton.id = username;
       listButton.textContent = buttonText;
       newPlayerItem.appendChild(listButton);
@@ -67,13 +68,18 @@ window.onload = function() {
     playersOnlineList.textContent = '';
     for (const username of players) {
       const newPlayerRow = getPlayerRowInLobby(username, 'challenge')
-      playersOnlineList.appendChild(newPlayerRow);
+      if (!(thisUsername === username)){
+        playersOnlineList.appendChild(newPlayerRow);
+      }
     }
   });
 
   socket.on('player-joined', (player) => {
-    const newPlayerItem = getPlayerRowInLobby(player.username, 'challenge');
-    playersOnlineList.appendChild(newPlayerItem);
+    const { username } = player;
+    if (!(username === thisUsername)) {
+      const newPlayerItem = getPlayerRowInLobby(username, 'challenge');
+      playersOnlineList.appendChild(newPlayerItem);
+    }
   });
 
   socket.on('player-left', (username) => {
@@ -99,10 +105,6 @@ window.onload = function() {
     if (clickedBtn.classList.contains('challengeBtn')) {
       const challenger = thisUsername;
       const opponent = clickedBtn.id;
-      if (challenger === opponent) {
-        alert("You can't challenge yourself :)");
-        return;
-      }
       // emit a challenge event to web socket
       socket.emit('challenge-issued', { challenger, opponent });
     }
