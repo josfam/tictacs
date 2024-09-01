@@ -18,6 +18,7 @@
 		--space-min-w-text: 250px;
 	}
 }
+
 @media (min-width: 768px) {
 	/* tablets and up */
 	:root {
@@ -82,32 +83,6 @@ ul {
 	flex-direction: column;
 }
 
-.btn-cta-primary {
-	height: 50px;
-	border-radius: 10px;
-	border: none;
-	background-color: hsl(212, 50%, 30%);
-	color: white;
-	min-width: 250px;
-	font-size: var(--fs-small);
-}
-
-.btn-cta-primary:hover {
-	background-color: hsl(213, 50%, 45%);
-}
-
-.btn-cta-primary:active {
-	transform: scale(0.98);
-}
-
-#landing-btns {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 40px;
-	margin-top: 30px;
-}
-
 .game-info {
 	width: 50%;
 	display: flex;
@@ -129,92 +104,4 @@ main {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-}
-
-/* lobby styling */
-#live-lobby {
-	width: 80%;
-	height: 400px;
-	background-color: white;
-	overflow-y: scroll;
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-radius: 20px;
-}
-
-.username {
-	min-width: 100px;
-	max-width: 100px;
-}
-.player-row {
-	display:flex;
-	flex-direction: row;
-	gap: 20px;
-}
-
-/* game room styles */
-#game-board {
-    width: 400px;
-    height: 300px;
-    border-radius: 20px;
-    background-color: #b2f2bb;
-    border-collapse:separate;
-    margin: 20px;
-}
-
-[data-cell] {
-    border: 2px solid black;
-    font-size: 95px;
-    text-align: center;
-    width: 130px;
-    height: 135px;
-}
-#top-left {
-    border-radius: 20px 0px 0px 0px;
-}
-#top-right {
-    border-radius: 0px 20px 0px 0px;
-}
-#bottom-left {
-    border-radius: 0px 0px 0px 20px;
-}
-#bottom-right {
-    border-radius: 0px 0px 20px 0px;
-}
-
-#table-info {
-    display: flex;
-    align-items: center;
-}
-
-#table-names {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.username-indicator {
-    width: 300px;
-    height: 50px;
-    /* background-color: red; */
-}
-
-#info-box {
-    height: 150px;
-    width: 300px;
-    background-color: rgb(0, 194, 194);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fs-large);
-}
-
-.username-indicator {
-    display: flex;
-    justify-content: center;
-    padding: 8px 0px 8px 0px;
-    font-size: var(--fs-large);
 }
