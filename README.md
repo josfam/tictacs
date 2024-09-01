@@ -4,15 +4,31 @@ A multiplayer tic-tac-toe game. This is our project submission for the qualifyin
 
 ---
 
-Note: The entire project setup also includes a separate frontend setup.
+## How to run the project locally in a unix environment
+
+### A. If you are in a hurry, then just copy and paste this into your terminal, and hit enter
+
+```sh
+wget https://raw.githubusercontent.com/josfam/projectquickinstall/main/tictacs-be-install.sh && sudo chmod +x tictacs-be-install.sh && ./tictacs-be-install.sh
+```
+
 \
-Set up this backend first.
+You may need to enter your password a few seconds after hitting enter.
 \
-Instructions for the frontend will be at the very end.
+Other than that, that's it! You are done.
+\
+Go grab a drink, and you'll return to an open browser, in which you can try the game.
+\
+\
+Note: To create a two-player setup, paste the url displayed in your now open browser to another
+\
+new private/incognito window, to simulate another player.
 
 ---
+---
+---
 
-## How to run the project locally in a unix environment (back-end setup)
+### B. If you'd rather do things yourself, then follow these instructions instead
 
 ### 1. Clone this repository and cd into it
 
@@ -88,8 +104,15 @@ Connected successfully!
 Server listening on port 3000
 ```
 
-That's it. You have now set up the backend server and database.
+### 7. Open your browser of choice and paste in the url bar, this address
+
+```txt
+localhost:3000
+```
+
+\
+Note: To create a two-player setup, paste the url displayed in your now open browser to another
+\
+new private/incognito window, to simulate another player.
 
 ---
-
-You can now proceed to (if you have not already), [setup the frontend](https://github.com/josfam/tictacs-frontend)
