@@ -8,4 +8,7 @@
 
 	/* spacing */
 	--space-min-w-text: 700px;
+
+	/* fonts */
+	--ff-body: 'Noto Sans', sans-serif;
 }
