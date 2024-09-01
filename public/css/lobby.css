@@ -2,7 +2,8 @@
 
 /* lobby styling */
 #live-lobby {
-	width: 80%;
+	min-width: var(--sp-tiny-phone);
+	width: 70%;
 	height: 400px;
 	background-color: white;
 	overflow-y: scroll;

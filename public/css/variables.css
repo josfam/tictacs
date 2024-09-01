@@ -8,6 +8,7 @@
 
 	/* spacing */
 	--space-min-w-text: 700px;
+	--sp-tiny-phone: 350px;
 
 	/* fonts */
 	--ff-body: 'Noto Sans', sans-serif;
