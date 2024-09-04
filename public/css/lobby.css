@@ -17,6 +17,7 @@
 .username {
 	min-width: 100px;
 	max-width: 100px;
+	font-size: var(--fs-normal);
 }
 
 .player-row {

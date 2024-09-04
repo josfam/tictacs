@@ -1,22 +1,39 @@
 @import url('variables.css');
 
-.btn-cta-primary {
+.btn-cta-primary,
+.btn-cta-primary-outlined {
 	height: 50px;
 	border-radius: 10px;
-	border: none;
-	background-color: hsl(212, 50%, 30%);
-	color: white;
 	max-width: 250px;
 	min-width: 200px;
+	font-family: var(--ff-body);
 	font-size: var(--fs-small);
 }
 
+.btn-cta-primary {
+	border: none;
+	background-color: var(--blue-500);
+	color: white;
+}
+
 .btn-cta-primary:hover {
-	background-color: hsl(213, 50%, 45%);
+	background-color: var(--blue-400);
 }
 
 .btn-cta-primary:active {
 	transform: scale(0.98);
+}
+
+.btn-cta-primary-outlined {
+	background-color: transparent;
+	border: 1px solid var(--blue-400);
+	color: var(--blue-400);
+}
+
+.btn-cta-primary-outlined:hover {
+	border: 1px solid var(--blue-300);
+	background-color: var(--blue-300);
+	color: var(--blue-500);
 }
 
 #signup-login-btns-container {

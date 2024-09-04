@@ -45,7 +45,7 @@ window.onload = function() {
       // button
       const listButton = doc.createElement('button');
       listButton.classList.add(`${buttonText}Btn`);
-      listButton.classList.add('btn-cta-primary');
+      listButton.classList.add('btn-cta-primary', 'btn-cta-primary-outlined');
       listButton.id = username;
       listButton.textContent = buttonText;
       newPlayerItem.appendChild(listButton);

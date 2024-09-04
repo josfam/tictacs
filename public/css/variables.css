@@ -12,4 +12,14 @@
 
 	/* fonts */
 	--ff-body: 'Noto Sans', sans-serif;
+
+	/* colors */
+	/* blues */
+	--blue-500: hsl(213, 50%, 30%);
+	--blue-400: hsl(213, 50%, 45%);
+	--blue-300: hsl(213, 69%, 72%);
+	--blue-200: hsl(214, 80%, 90%);
+
+	/* creams */
+	--cream-200: hsl(49, 88%, 90%);
 }
