@@ -1,6 +1,6 @@
 window.onload = function() {
   const doc = document;
-  const logoutBtn = doc.getElementById('logoutbtn');
+  const logoutBtn = doc.getElementById('logout-btn');
   // socket io events
   const socket = io();
 
