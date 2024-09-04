@@ -1,8 +1,7 @@
 window.onload = function() {
   const doc = document;
-
   const socket = io();
-
+  
   //extract page params
   const urlParams = new URLSearchParams(window.location.search);
   const p1 = urlParams.get('p1');
@@ -14,23 +13,23 @@ window.onload = function() {
   const otherPMark = (thisPMark === 'X') ? 'O' : 'X';
   let canEditBoard = true;
   let gameOver = false; // store game over status after every move
-
+  
   console.log(p1, p2, thisP, otherP, thisPMark, otherPMark);
-
+  
   const pairingInfo = {
     thisP,
     otherP,
     'challenger': p1,
     'opponent': p2
   };
-
+  
   // place player names on the board
   const thisPNameDiv = doc.getElementById('this-player-name');
   thisPNameDiv.textContent = `${thisP} (${thisPMark})`;
-
+  
   const otherPIndicator = doc.getElementById('other-player-name')
   otherPIndicator.textContent = `${otherP} (${otherPMark})`;
-
+  
   const updateInfoBox = function (text) {
     const infoBox = doc.getElementById('info-box');
     infoBox.textContent = text;
@@ -52,14 +51,14 @@ window.onload = function() {
   let playerTurn = p1;
   const infoBox = doc.getElementById('info-box');
   updateInfoBox(`${p1}'s turn!`);
-
+  
   // make move
   const placeSymbol = function(event) {
     if (!canEditBoard) {
       alert("Wait your turn!");
       return;
     }
-
+    
     const cell = event.target;
     if (cell.textContent){
       return;
@@ -79,7 +78,7 @@ window.onload = function() {
   allCells.forEach(cell => {
     cell.addEventListener('click', placeSymbol);
   });
-
+  
   // update board
   socket.on('update-board', (boardData) => {
     canEditBoard = true;
@@ -91,26 +90,26 @@ window.onload = function() {
       canEditBoard = false;
       return;
     }
-
+    
     updateInfoBox(`${nextTurn}'s turn!`);
     gameOver = checkGameOver();
   });
-
+  
   // announce winner
   socket.on('you-won', (player) => {
     updateInfoBox('You won!');
   });
-
+  
   // player lost
   socket.on('you-lost', () => {
     updateInfoBox('You Lost :(');
   });
-
+  
   // announce draw
   socket.on('you-drew', () => {
     updateInfoBox("It's a draw!");
   });
-
+  
   const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -121,7 +120,7 @@ window.onload = function() {
     [0, 4, 8],
     [2, 4, 6],
   ];
-
+  
   const makeTableArray = function () {
     // start with null
     const table = Array(9).fill(null);
@@ -134,7 +133,7 @@ window.onload = function() {
     console.log(table);
     return table;
   }
-
+  
   const winnerExists = function (grid) {
     for (row of winningCombos) {
       [a, b, c] = row;
@@ -153,4 +152,26 @@ window.onload = function() {
     }
     return 1;
   }
+  // logout and home buttons
+  const logoutBtn = doc.getElementById('logout-btn');
+  const homeBtn = doc.getElementById('home-btn');
+  
+  logoutBtn.addEventListener('click', async (event) => {
+    const response = await fetch('/api/v1/auth/logout', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      alert('Logged out successfully');
+      window.location.href = '/';
+    } else {
+      alert(response.message);
+    }
+  });
+
+  homeBtn.addEventListener('click', async (event) => {
+    window.location.href = "/home";
+  });
 };
