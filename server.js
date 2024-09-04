@@ -112,12 +112,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('move-made', (moveData) => {
-    const { thisP, otherP, location, thisPMark } = moveData;
+    const { thisP, otherP, location, thisPMark, gameOver} = moveData;
     const opponentSocket = getUserSocket(otherP);
     opponentSocket.emit('update-board', {
       'opponentMark': thisPMark,
       'nextTurn': otherP,
-      location
+      location,
+      gameOver,
     });
   });
 

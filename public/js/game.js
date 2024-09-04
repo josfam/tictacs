@@ -13,6 +13,7 @@ window.onload = function() {
   const thisPMark = (thisP === p1) ? 'X': 'O';
   const otherPMark = (thisPMark === 'X') ? 'O' : 'X';
   let canEditBoard = true;
+  let gameOver = false; // store game over status after every move
 
   console.log(p1, p2, thisP, otherP, thisPMark, otherPMark);
 
@@ -45,13 +46,13 @@ window.onload = function() {
   const checkGameOver = function () {
     if (winnerExists(makeTableArray())) {
       socket.emit('game-won', {'winner': thisP, 'opponent': otherP});
-      return 1;
+      return true;
     }
     if (boardIsFull(makeTableArray())) {
       socket.emit('game-drawn', {thisP, otherP});
-      return 1;
+      return true;
     }
-    return 0;
+    return false;
   }
 
   // x (the challenger) starts first always
@@ -73,11 +74,11 @@ window.onload = function() {
     cell.textContent = thisPMark;
     const location = this.dataset.cell;
     canEditBoard = false;
-    if (!checkGameOver()) {      
-      playerTurn = otherP;
-      updateInfoBox(`${otherP}'s turn!`);
-      socket.emit('move-made', {thisP, otherP, location, thisPMark});
-    };
+    gameOver = checkGameOver();
+
+    playerTurn = otherP;
+    updateInfoBox(`${otherP}'s turn!`);
+    socket.emit('move-made', {thisP, otherP, location, thisPMark, gameOver});
   };
 
   // attach event listeners to each cell
@@ -89,12 +90,17 @@ window.onload = function() {
   // update board
   socket.on('update-board', (boardData) => {
     canEditBoard = true;
-    const {opponentMark, location, nextTurn} = boardData;
+    const {opponentMark, location, nextTurn, gameOver} = boardData;
     console.log('Received', opponentMark, location);
     const cell = doc.getElementById(location);
     cell.textContent = opponentMark;
+    if (gameOver) {
+      canEditBoard = false;
+      return;
+    }
+
     updateInfoBox(`${nextTurn}'s turn!`);
-    checkGameOver();
+    gameOver = checkGameOver();
   });
 
   // announce winner
