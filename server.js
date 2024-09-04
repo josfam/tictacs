@@ -100,17 +100,6 @@ io.on('connection', (socket) => {
     opponentSocket.emit('challenged-to-a-game', challenger);
   });
 
-  socket.on('game-joined', (playerInfo) => {
-    const { thisP, otherP, challenger, opponent} = playerInfo;
-    const gameRoomName = `${challenger}-${opponent}-game`;
-    const opponentSocket = getUserSocket(otherP);
-    // put the two players in a room
-    socket.join(gameRoomName);
-    opponentSocket.join(gameRoomName);
-    socket.emit('good-luck', thisP);
-    opponentSocket.emit('good-luck', otherP);
-  });
-
   socket.on('move-made', (moveData) => {
     const { thisP, otherP, location, thisPMark, gameOver} = moveData;
     const opponentSocket = getUserSocket(otherP);

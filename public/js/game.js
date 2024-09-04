@@ -24,13 +24,6 @@ window.onload = function() {
     'opponent': p2
   };
 
-  // const pairing = (thisP === p1) ? {thisP, otherP} : {otherP, thisP};
-  // decide opponent role and place name at the bottom of the board
-  socket.emit('game-joined', pairingInfo);
-  socket.on('good-luck', (username) => {
-    // alert(`good luck ${username}`);
-  });
-
   // place player names on the board
   const thisPNameDiv = doc.getElementById('this-player-name');
   thisPNameDiv.textContent = `${thisP} (${thisPMark})`;
