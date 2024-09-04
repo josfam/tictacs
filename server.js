@@ -121,6 +121,16 @@ io.on('connection', (socket) => {
     });
   });
 
+  socket.on('game-won', (players) => {
+    const { winner, opponent } = players;
+    console.log('winner', winner, 'loser', opponent);
+    const opponentSocket = getUserSocket(opponent);
+    console.log(winner, 'won!');
+    socket.emit('you-won');
+    opponentSocket.emit('you-lost');
+    console.log(opponent, 'lost!');
+  });
+
   socket.on('disconnect', () => {
     // remove from online players
     if (players_online.has(username)) {

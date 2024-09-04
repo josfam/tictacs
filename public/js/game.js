@@ -37,10 +37,27 @@ window.onload = function() {
   const otherPIndicator = doc.getElementById('other-player-name')
   otherPIndicator.textContent = `${otherP} (${otherPMark})`;
 
+  const updateInfoBox = function (text) {
+    const infoBox = doc.getElementById('info-box');
+    infoBox.textContent = text;
+  };
+
+  const checkGameOver = function () {
+    if (winnerExists(makeTableArray())) {
+      socket.emit('game-won', {'winner': thisP, 'opponent': otherP});
+      return 1;
+    }
+    if (boardIsFull(makeTableArray())) {
+      socket.emit('game-drawn', {thisP, otherP});
+      return 1;
+    }
+    return 0;
+  }
+
   // x (the challenger) starts first always
   let playerTurn = p1;
   const infoBox = doc.getElementById('info-box');
-  infoBox.textContent = `${p1}'s turn!`
+  updateInfoBox(`${p1}'s turn!`);
 
   // make move
   const placeSymbol = function(event) {
@@ -56,19 +73,11 @@ window.onload = function() {
     cell.textContent = thisPMark;
     const location = this.dataset.cell;
     canEditBoard = false;
-    makeTableArray();
-    playerTurn = otherP;
-    infoBox.textContent = `${otherP}'s turn!`
-    if (winnerExists(makeTableArray())) {
-      alert('Winner found');
-      return;
-    }
-    if (boardIsFull(makeTableArray())) {
-      alert('Draw');
-      return;
-    }
-
-    socket.emit('move-made', {thisP, otherP, location, thisPMark});
+    if (!checkGameOver()) {      
+      playerTurn = otherP;
+      updateInfoBox(`${otherP}'s turn!`);
+      socket.emit('move-made', {thisP, otherP, location, thisPMark});
+    };
   };
 
   // attach event listeners to each cell
@@ -84,15 +93,23 @@ window.onload = function() {
     console.log('Received', opponentMark, location);
     const cell = doc.getElementById(location);
     cell.textContent = opponentMark;
-    if (winnerExists(makeTableArray())) {
-      alert('Winner found');
-      return;
-    }
-    if (boardIsFull(makeTableArray())) {
-      alert('Draw');
-      return;
-    }
-    infoBox.textContent = `${nextTurn}'s turn!`
+    updateInfoBox(`${nextTurn}'s turn!`);
+    checkGameOver();
+  });
+
+  // announce winner
+  socket.on('you-won', (player) => {
+    updateInfoBox('You won!');
+  });
+
+  // player lost
+  socket.on('you-lost', () => {
+    updateInfoBox('You Lost :(');
+  });
+
+  // announce draw
+  socket.on('you-drew', () => {
+    updateInfoBox("It's a draw!");
   });
 
   const winningCombos = [
