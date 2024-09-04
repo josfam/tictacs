@@ -29,4 +29,12 @@ router.get('/apitesting', async(req, res) => {
   res.sendFile(path.join(__dirname, '..', 'testing', 'apitesting.html'));
 });
 
+router.get('/home', async(req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'home.html'));
+});
+
+router.get('/computerGame', async(req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'computerGame.html'));
+});
+
 module.exports = router;
