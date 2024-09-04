@@ -2,17 +2,18 @@
 
 /* game room styles */
 #game-board {
-    width: 400px;
-    height: 300px;
+    min-width: 400px;
+    min-height: 300px;
     border-radius: 20px;
-    background-color: #b2f2bb;
+    background-color: var(--cream-200);
     border-collapse:separate;
     margin: 20px;
 }
 
 [data-cell] {
-    border: 2px solid #88929F;
-    font-size: 95px;
+	box-shadow: inset 0 0 0 2px hsl(129, 51%, 58%); /* Adjust size and color as needed */
+    border: 3px solid var(--cream-200);
+	font-size: 90px;
     text-align: center;
     width: 130px;
     height: 135px;
@@ -53,7 +54,57 @@
     font-size: var(--fs-large);
 }
 
+/* responsive - media queries */
+@media (min-width: 768px) and (max-width: 1024px) {
+	/* game board and info */
+	#table-info {
+		flex-direction: column;
+		gap: 20px;
+	}
+	#info-box {
+		height: calc(var(--fs-normal) + 40px);
+	}
+}
+
+@media (min-width: 425px) and (max-width: 768px) {
+	/* game board and info */
+	#table-info {
+		flex-direction: column;
+		gap: 20px;
+	}
+	#info-box {
+		height: calc(var(--fs-normal) + 40px);
+	}
+}
+
+@media (min-width: 375px) and (max-width: 425px) {
+	/* game board and info */
+	#table-info {
+		flex-direction: column;
+		gap: 20px;
+	}
+	#info-box {
+		height: calc(var(--fs-normal) + 40px);
+	}
+	[data-cell] {
+		max-width: 80px;
+		max-height: 90px;
+	}
+}
+
+@media (min-width: 320px) and (max-width: 375px) {
+	/* game board and info */
+	#table-info {
+		flex-direction: column;
+	}
+}
+
 /* per-cell styling for the game board */
+#game-board td {
+	background-color: #b2f2bb;
+}
+
+
 
 td#\30 {
 	/* top left cell */
