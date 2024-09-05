@@ -1,19 +1,11 @@
-window.onload = function() {
+window.onload = async function() {
   const doc = document;
   const computerBtn = doc.getElementById('computerbtn');
   const humanBtn = doc.getElementById('humanbtn');
-
-  computerBtn.addEventListener('click', async (event) => {
-      window.location.href = '/computerGame';
-  });
-
-  humanBtn.addEventListener('click', async (event) => {
-      window.location.href = '/lobby';
-  });
-
   // logout and home buttons
   const logoutBtn = doc.getElementById('logout-btn');
-  
+  let playerName = '';
+
   logoutBtn.addEventListener('click', async (event) => {
     const response = await fetch('/api/v1/auth/logout', {
       method: 'post',
@@ -27,5 +19,31 @@ window.onload = function() {
     } else {
       alert(response.message);
     }
+  });
+
+  const getUserName = async function () {
+    const response = await fetch('/api/v1/users/username', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const info = await response.json();
+    if (response.ok) {
+      console.log('response is:', response);
+    } else {
+      alert(response.json().message);
+      return;
+    }
+    return info.username;
+  }
+
+  playerName = await getUserName();
+
+  computerBtn.addEventListener('click', async (event) => {
+    window.location.href = `/computerGame?p1=${playerName}&p1Mark=X&p2=computron&p2Mark=O`;
+  });
+
+  humanBtn.addEventListener('click', async (event) => {
+    window.location.href = '/lobby';
   });
 }

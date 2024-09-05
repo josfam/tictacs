@@ -13,5 +13,13 @@ router.get('/online', async (req, res) => {
   }
 });
 
+router.get('/username', (req, res) => {
+  if (req.session && req.session.username) {
+    return res.status(200).json({ username: req.session.username });
+  } else {
+    return res.status(401).json({ message: 'Please log in to perform this action' });
+  }
+});
+
 // exports
 module.exports = router;
