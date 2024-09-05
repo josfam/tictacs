@@ -3,11 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer game</title>
+    <title>Computer Game</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/game.css">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script type="module" src="js/computerGame.js" defer></script>
 </head>
 <body>
     <main>
-        <h1>Computer game</h1>
+        <div id="table-info">
+            <div id="table-names">
+                <div class="username-indicator" id="other-player-name"></div>
+                <table id="game-board">
+                    <tr>
+                        <td id="0" data-cell="0"></td>
+                        <td id="1" data-cell="1"></td>
+                        <td id="2" data-cell="2"></td>
+                    </tr>
+                    <tr>
+                        <td id="3" data-cell="3"></td>
+                        <td id="4" data-cell="4"></td>
+                        <td id="5" data-cell="5"></td>
+                    </tr>
+                    <tr>
+                        <td id="6" data-cell="6"></td>
+                        <td id="7" data-cell="7"></td>
+                        <td id="8" data-cell="8"></td>
+                    </tr>
+                </table>
+                <div class="username-indicator", id="this-player-name"></div>
+            </div>
+
+            <div id="info-box"></div>
+        </div>
     </main>
+    <footer class="logout-footer">
+        <button id="logout-btn" class="btn-cta-primary btn-cta-primary-outlined">Logout</button>
+        <button id="home-btn" class="btn-cta-primary btn-cta-primary-outlined">Home</button>
+    </footer>
 </body>
 </html>
