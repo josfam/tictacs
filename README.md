@@ -83,7 +83,26 @@ DB_PORT="27017"
 DB_NAME="tictacs"
 ```
 
-### 6. Start the local server
+### 6. Run the mongodb server
+
+If you are on a normal linux distribution (not WSL for windows, or a non-standard linux distribution)
+then you should be able to start the mongo db server with
+
+```sh
+sudo systemctl start mongod
+```
+
+If you are trying to run this on a linux environment on windows via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+\
+or if you are using a version of linux that does not support systemd, then use this command to start the
+\
+mongodb server
+
+```sh
+sudo mongod --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log --fork
+```
+
+### 7. Start the local web server
 
 ```sh
 npm run devstart
@@ -104,7 +123,7 @@ Connected successfully!
 Server listening on port 3000
 ```
 
-### 7. Open your browser of choice and paste in the url bar, this address
+### 8. Open your browser of choice and paste in the url bar, this address
 
 ```txt
 localhost:3000
