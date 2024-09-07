@@ -28,13 +28,6 @@ window.onload = function() {
   let gameOver = false; // store game over status after every move
   
   console.log(p1, p2, thisP, otherP, thisPMark, otherPMark);
-  
-  const pairingInfo = {
-    thisP,
-    otherP,
-    'challenger': p1,
-    'opponent': p2
-  };
 
   // place player names on the board
   showPlayerNamesOnBoard(thisP, thisPMark, otherP, otherPMark);
@@ -58,6 +51,10 @@ window.onload = function() {
   // make move
   const placeSymbol = function(event) {
     if (!canEditBoard) {
+      if (gameOver) {
+        alert("The game is over!");
+        return;
+      }
       alert("Wait your turn!");
       return;
     }
@@ -106,15 +103,21 @@ window.onload = function() {
   // announce winner
   socket.on('you-won', (player) => {
     updateInfoBox('You won!');
+    canEditBoard = false;
+    gameOver = true;
   });
   
   // player lost
   socket.on('you-lost', () => {
     updateInfoBox('You Lost :(');
+    canEditBoard = false;
+    gameOver = true;
   });
   
   // announce draw
   socket.on('you-drew', () => {
     updateInfoBox("It's a draw!");
+    canEditBoard = false;
+    gameOver = true;
   });
 };
