@@ -4,6 +4,12 @@ A multiplayer tic-tac-toe game. This is our project submission for the qualifyin
 
 ---
 
+## Demo
+
+![A two-player demo of the application](/demos/tictacs.gif "A two-player demo")
+
+---
+
 ## How to run the project locally in a unix environment
 
 ### A. If you are in a hurry, then just copy and paste this into your terminal, and hit enter
