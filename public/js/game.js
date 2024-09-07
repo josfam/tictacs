@@ -67,7 +67,7 @@ window.onload = function() {
       return;
     }
     cell.textContent = thisPMark;
-    const location = this.dataset.cell;
+    const location = this.id;
     canEditBoard = false;
     gameOver = checkGameOver();
 
@@ -77,7 +77,7 @@ window.onload = function() {
   };
 
   // attach event listeners to each cell
-  const allCells = doc.querySelectorAll('[data-cell]');
+  const allCells = doc.querySelectorAll('.board-location');
   allCells.forEach(cell => {
     cell.addEventListener('click', placeSymbol);
   });
