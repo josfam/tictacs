@@ -103,12 +103,16 @@ io.on('connection', (socket) => {
   socket.on('move-made', (moveData) => {
     const { thisP, otherP, location, thisPMark, gameOver} = moveData;
     const opponentSocket = getUserSocket(otherP);
-    opponentSocket.emit('update-board', {
-      'opponentMark': thisPMark,
-      'nextTurn': otherP,
-      location,
-      gameOver,
-    });
+    if (opponentSocket) {
+      opponentSocket.emit('update-board', {
+        'opponentMark': thisPMark,
+        'nextTurn': otherP,
+        location,
+        gameOver,
+      });
+    } else {
+      socket.emit('game-opponent-left');
+    }
   });
 
   socket.on('game-won', (players) => {

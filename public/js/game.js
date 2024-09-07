@@ -82,6 +82,11 @@ window.onload = function() {
     cell.addEventListener('click', placeSymbol);
   });
 
+  socket.on('game-opponent-left', () => {
+    alert('Your opponent has abruptly left the game');
+    window.location.href = '/lobby';
+  });
+
   // update board
   socket.on('update-board', (boardData) => {
     canEditBoard = true;
