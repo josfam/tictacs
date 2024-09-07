@@ -98,6 +98,17 @@ ul {
 	font-weight: 400;
 }
 
+#player-name-greeting,
+#game-style-question {
+	font-family: var(--ff-body);
+	font-size: var(--fs-large);
+}
+
+#game-style-question {
+	margin-bottom: 40px;
+	font-size: var(--fs-normal);
+}
+
 /* page region */
 main {
 	margin: 0px;
