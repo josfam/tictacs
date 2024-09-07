@@ -85,12 +85,26 @@ ul {
 	flex-direction: column;
 }
 
-.game-info {
+#instruction-heading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: var(--fs-normal);
+}
+
+#instructions{
 	width: 50%;
+	text-align: center;
+	min-width: var(--sp-tiny-phone);
+	font-size: var(--fs-normal);
+}
+
+.game-info {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	min-width: var(--space-min-w-text);
 }
 
 .page-heading {
