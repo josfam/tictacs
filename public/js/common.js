@@ -96,10 +96,10 @@ export const winnerExists = function (grid) {
     console.log(row); // DEBUG
     const [a, b, c] = row;
     if (grid[a] !== '' && grid[a] === grid[b] && grid[a] === grid[c]) {
-      return 1;
+      return {winner: 1, cells: [a, b, c]}
     }
   }
-  return 0;
+  return {winner: 0, cells: []};
 };
 
 export const boardIsFull = function (grid) {
@@ -132,6 +132,17 @@ export const showPlayerNamesOnBoard = function (thisPName, thisPMark, otherPName
   const otherPNameDiv = doc.getElementById('other-player-name')
   otherPNameDiv.textContent = `${otherPName} (${otherPMark})`;
 };
+
+export const highlightWinningCells = function (mode, cells) {
+  for (const index of cells) {
+    const cell = doc.getElementById(index);
+    if (mode === 'win') {
+      cell.classList.add('winning-highlight');
+    } else {
+      cell.classList.add('losing-highlight');
+    }
+  }
+}
 
 export const updateCell = function (location, mark) {
   /** Puts the provided mark into the cell in the provided location */

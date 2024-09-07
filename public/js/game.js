@@ -7,6 +7,7 @@ import {
   winnerExists,
   boardIsFull,
   getUsername,
+  highlightWinningCells,
 } from "./common.js";
 
 window.onload = function() {
@@ -34,8 +35,9 @@ window.onload = function() {
   showPlayerNamesOnBoard(thisP, thisPMark, otherP, otherPMark);
 
   const checkGameOver = function () {
-    if (winnerExists(makeTableArray())) {
-      socket.emit('game-won', {'winner': thisP, 'opponent': otherP});
+    const { winner , cells } = winnerExists(makeTableArray());
+    if (winner) {
+      socket.emit('game-won', {'winner': thisP, 'opponent': otherP, 'winningCells': cells});
       return true;
     }
     if (boardIsFull(makeTableArray())) {
@@ -101,15 +103,17 @@ window.onload = function() {
     gameOver = checkGameOver();
   });
   
-  // announce winner
-  socket.on('you-won', (player) => {
+  // announce to winner
+  socket.on('you-won', (winningCells) => {
+    highlightWinningCells('win', winningCells);
     updateInfoBox('You won!');
     canEditBoard = false;
     gameOver = true;
   });
   
-  // player lost
-  socket.on('you-lost', () => {
+  // announce to loser
+  socket.on('you-lost', (opponentWinningCells) => {
+    highlightWinningCells('loss', opponentWinningCells);
     updateInfoBox('You Lost :(');
     canEditBoard = false;
     gameOver = true;

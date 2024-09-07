@@ -116,12 +116,12 @@ io.on('connection', (socket) => {
   });
 
   socket.on('game-won', (players) => {
-    const { winner, opponent } = players;
-    console.log('winner', winner, 'loser', opponent);
+    const { winner, opponent, winningCells } = players;
+    console.log('winner', winner, 'loser', opponent, 'winning cells', winningCells); // DEBUG
     const opponentSocket = getUserSocket(opponent);
     console.log(winner, 'won!');
-    socket.emit('you-won');
-    opponentSocket.emit('you-lost');
+    socket.emit('you-won', winningCells);
+    opponentSocket.emit('you-lost', winningCells);
     console.log(opponent, 'lost!');
   });
 

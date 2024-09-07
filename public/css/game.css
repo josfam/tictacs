@@ -54,6 +54,16 @@
     font-size: var(--fs-large);
 }
 
+.winning-highlight {
+	background-color: hsl(128, 71%, 82%);
+	box-shadow: inset 0 0 0 6px hsl(128, 30%, 48%);
+}
+
+.losing-highlight {
+	background-color: hsl(0, 90%, 85%);
+	box-shadow: inset 0 0 0 6px hsl(0, 80%, 70%);
+}
+
 /* responsive - media queries */
 @media (min-width: 768px) and (max-width: 1024px) {
 	/* game board and info */
@@ -101,7 +111,7 @@
 
 /* per-cell styling for the game board */
 #game-board td {
-	background-color: #b2f2bb;
+	background-color: hsl(128, 71%, 82%);
 }
 
 
