@@ -1,24 +1,18 @@
 import {
-  listenForLogout
+  listenForLogout,
+  getUsername,
+  addUsernameToLobbyHeader,
 } from './common.js'
 
-window.onload = function() {
+window.onload = async function() {
   const doc = document;
   listenForLogout();
 
   // socket io events
   const socket = io();
 
-  let thisUsername = ''; // this user is themselves a prospect challenger
-
-  socket.on('get-your-name', (username) => {
-    thisUsername = username;
-    const pageHeading = doc.querySelector('.page-heading');
-    const originalText = pageHeading.textContent;
-    if (!(originalText.includes(username))) {
-      pageHeading.textContent = `${originalText} (${username})`;
-    };
-  });
+  const thisUsername = await getUsername();
+  addUsernameToLobbyHeader(thisUsername);
 
   const playersOnlineList = doc.getElementById('players-online');
 

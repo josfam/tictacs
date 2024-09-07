@@ -1,5 +1,28 @@
 const doc = document;
 
+export const getUsername = async function () {
+  const response = await fetch('/api/v1/users/username',{
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+  });
+  const info = await response.json();
+  if (response.ok) {
+    return info.username;
+  } else {
+    alert(info.message);
+  }
+}
+
+export const addUsernameToLobbyHeader = function (username) {
+    const pageHeading = doc.querySelector('.page-heading');
+    const originalText = pageHeading.textContent;
+    if (!(originalText.includes(username))) {
+      pageHeading.textContent = `${originalText} (${username})`;
+    };
+};
+
 export const listenForLogout = function () {
   /** Attaches an event listener to the logout button, and logs the user out
    * should the button be clicked.

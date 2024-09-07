@@ -5,7 +5,8 @@ import {
   updateInfoBox,
   makeTableArray,
   winnerExists,
-  boardIsFull
+  boardIsFull,
+  getUsername,
 } from "./common.js";
 
 window.onload = function() {
