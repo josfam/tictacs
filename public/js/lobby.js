@@ -72,7 +72,6 @@ window.onload = async function() {
 
   // being challenged by another player
   socket.on('challenged-to-a-game', (opponent) => {
-    alert(`You have been challenged to a game! by ${opponent}`)
     window.location.href = `/game?p1=${opponent}&p1Mark=X&p2=${thisUsername}&p2Mark=O&thisP=${thisUsername}`;
   });
 
