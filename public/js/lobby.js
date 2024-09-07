@@ -95,7 +95,6 @@ window.onload = function() {
 
   // challenging another player
   socket.on('challenging-to-a-game', (opponent) => {
-    alert(`Challenge sent to ${opponent}`);
     window.location.href = `/game?p1=${thisUsername}&p1Mark=X&p2=${opponent}&p2Mark=O&thisP=${thisUsername}`;
   });
 
