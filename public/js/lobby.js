@@ -1,24 +1,13 @@
+import {
+  listenForLogout
+} from './common.js'
+
 window.onload = function() {
   const doc = document;
-  const logoutBtn = doc.getElementById('logout-btn');
+  listenForLogout();
+
   // socket io events
   const socket = io();
-
-  logoutBtn.addEventListener('click', async (e) => {
-    const response = await fetch('/api/v1/auth/logout', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      }});
-    const info = await response.json();
-    if (response.ok) {
-      socket.emit('logout');
-      alert(info.message);
-      window.location.href = '/';
-    } else {
-      alert(info.message);
-    }
-  });
 
   let thisUsername = ''; // this user is themselves a prospect challenger
 
